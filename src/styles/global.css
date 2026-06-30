@@ -155,10 +155,38 @@ html.js .hero-bg img.is-active{animation:heroKen 7s ease-out forwards}
   .doc-panel:hover .doc-cap{opacity:1;transform:none}
 }
 @media(max-width:720px){
-  .docs-accordion{height:clamp(240px,58vw,300px);gap:6px}
-  .doc-panel{min-width:30px}
-  .doc-panel.active{flex-grow:7}
-  .doc-cap{padding:12px 13px;font-size:13px}
+  /* The horizontal accordion is far too cramped with 8 panels on a phone (the
+     open photo only gets the leftover sliver). Switch to a swipeable scroll-snap
+     carousel instead: each photo opens large, swipe sideways to browse. CSS-only,
+     so the accordion JS still runs harmlessly (its .active class has no effect here). */
+  .docs-accordion{
+    height:auto;
+    gap:12px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    padding:8px;
+    scrollbar-width:thin;
+    scrollbar-color:var(--muted) var(--border);
+  }
+  /* Slim, rounded scrollbar that doubles as a swipe-progress indicator.
+     (On iOS Safari the system's own overlay scrollbar shows instead — also fine.) */
+  .docs-accordion::-webkit-scrollbar{height:6px}
+  .docs-accordion::-webkit-scrollbar-track{background:var(--border);border-radius:100px;margin:0 8px}
+  .docs-accordion::-webkit-scrollbar-thumb{background:var(--muted);border-radius:100px}
+  .docs-accordion::-webkit-scrollbar-thumb:hover,
+  .docs-accordion::-webkit-scrollbar-thumb:active{background:var(--ink)}
+  .doc-panel{
+    flex:0 0 82%;
+    min-width:0;
+    aspect-ratio:4/3;
+    border-radius:10px;
+    scroll-snap-align:center;
+    transition:none;
+  }
+  .doc-panel.active{flex-grow:0}/* neutralise the desktop expand on mobile */
+  .doc-cap{opacity:1;transform:none;padding:12px 14px;font-size:13px}/* caption always visible */
 }
 @media (prefers-reduced-motion: reduce){
   .doc-panel,.doc-panel img,.doc-cap{transition:none!important}
