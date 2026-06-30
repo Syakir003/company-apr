@@ -2,6 +2,6 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  // Saat deploy, ganti dengan domain final, mis: 'https://ayubpodorukun.com'
-  site: 'https://example.com',
+  // Domain final (dibeli di Hostinger, diarahkan ke Vercel)
+  site: 'https://ayubpodorukun.com',
 });
