@@ -1,0 +1,26 @@
+---
+import { site, visi, misi } from '../data/site.js';
+const check = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1A202C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 L6.5 12 L13 4.5"/></svg>`;
+---
+<section id="tentang" class="wrap section" style="padding-top:24px">
+  <div class="about" data-reveal-group>
+    <div class="ph"><img src="/assets/teknisi3.jpeg" alt="Pekerjaan teknisi pada unit AC industri" /></div>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Tentang Kami</span></div>
+      <h2>Mitra tata udara terpercaya sejak {site.established}.</h2>
+      <p class="lead">{site.name} bergerak di bidang perdagangan umum serta jasa rental AC, cleaning, servis, dan jual-beli AC. Kami juga melayani sektor industri besar untuk maintenance, servis, hingga penjualan unit AC dan sparepart pendukungnya.</p>
+      <div class="vm">
+        <div class="blk">
+          <h4>Visi</h4>
+          <ul><li><Fragment set:html={check} />{visi}</li></ul>
+        </div>
+        <div class="blk">
+          <h4>Misi</h4>
+          <ul>
+            {misi.map(m => <li><Fragment set:html={check} />{m}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

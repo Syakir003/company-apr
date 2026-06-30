@@ -1,0 +1,35 @@
+---
+import { site } from '../data/site.js';
+---
+<section id="beranda" class="hero">
+  <!-- Full-bleed background: crossfade slideshow over the field photos -->
+  <div class="hero-bg" data-parallax data-hero-slides>
+    <img class="is-active" src="/assets/teknisi1.jpeg" alt="Teknisi CV Ayub Podo Rukun menangani unit AC industri" fetchpriority="high" decoding="async" />
+    <img src="/assets/unit1.jpeg" alt="Armada Ayub AC mengirim unit AC ke lokasi" loading="lazy" decoding="async" />
+    <img src="/assets/teknisi2.jpeg" alt="Tim teknisi memasang unit AC di dinding gedung industri" loading="lazy" decoding="async" />
+    <img src="/assets/unit2.jpeg" alt="Pengiriman unit AC Gree dengan armada Ayub AC" loading="lazy" decoding="async" />
+    <img src="/assets/teknisi3.jpeg" alt="Teknisi mengelas pipa tembaga pada kompresor" loading="lazy" decoding="async" />
+    <img src="/assets/teknisi7.jpeg" alt="Teknisi mengisi refrigeran dengan manifold gauge" loading="lazy" decoding="async" />
+  </div>
+  <div class="hero-scrim"></div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-copy" data-reveal-group>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Sales · Service · Sparepart AC</span></div>
+      <h1>Solusi AC menyeluruh untuk industri dan hunian.</h1>
+      <p class="sub">{site.name} melayani penjualan, pemasangan, servis, dan perawatan AC untuk fasilitas industri maupun rumah tinggal. Dipercaya sejak {site.established} di Jawa Timur.</p>
+      <div class="actions">
+        <a class="btn btn-light" href="#kontak" data-magnetic>
+          Minta Penawaran
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#layanan">Lihat layanan kami →</a>
+      </div>
+    </div>
+
+    <div class="hero-stats" data-reveal>
+      <div class="hs"><b>19+</b><span>Tahun pengalaman</span></div>
+      <div class="hs"><b>14+</b><span>Rekanan industri besar</span></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,24 @@
+---
+import { brands } from '../data/site.js';
+---
+<section id="brand" class="wrap section" style="padding-top:24px">
+  <div class="sec-head" data-reveal>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Brand &amp; Kemitraan</span></div>
+      <h2>Brand AC yang bekerja sama dengan kami.</h2>
+    </div>
+    <div class="right">
+      <p>Penjualan, servis, dan perawatan untuk beragam brand AC terkemuka — dari unit hunian hingga industri besar. Mitra resmi <b>Daikin</b> &amp; <b>Gree</b> dll.</p>
+    </div>
+  </div>
+
+  <div class="brand-wall" data-reveal-group>
+    {brands.map(b => (
+      <div class="bw-cell" title={b.name}>
+        {b.file
+          ? <img class="bw-logo" src={b.file} alt={`Logo ${b.name}`} loading="lazy" decoding="async" />
+          : <b class="bw-name">{b.name}</b>}
+      </div>
+    ))}
+  </div>
+</section>

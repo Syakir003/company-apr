@@ -1,0 +1,16 @@
+---
+import { site } from '../data/site.js';
+const tel = `tel:${site.hp.replace(/\s/g, '')}`;
+---
+<section class="cta-band">
+  <div class="wrap inner" data-reveal-group>
+    <div>
+      <h2>Butuh penjualan, servis, atau perawatan AC?</h2>
+      <p>Hubungi {site.name} untuk penawaran dan jadwal layanan — gratis konsultasi awal.</p>
+    </div>
+    <div class="b">
+      <a class="btn btn-light" href="#kontak">Minta Penawaran</a>
+      <a class="btn btn-outline" href={tel}>{site.hp}</a>
+    </div>
+  </div>
+</section>

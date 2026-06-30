@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site.js';
+const mapsLink = 'https://maps.app.goo.gl/TS2aUt49Pyw1bcJ97';
+const embedSrc = 'https://maps.google.com/maps?q=-7.4739045,112.4555979&z=16&hl=id&output=embed';
+const waSuara = `https://wa.me/${site.waSuaraKonsumen}?text=${encodeURIComponent('Halo CV Ayub Podo Rukun, saya ingin menyampaikan masukan/keluhan.')}`;
+---
+<section id="lokasi" class="wrap section" style="padding-top:24px">
+  <div class="sec-head" data-reveal>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Lokasi</span></div>
+      <h2>Kunjungi kantor &amp; workshop kami.</h2>
+    </div>
+    <div class="right">
+      <p>{site.addressFull}</p>
+      <a class="link" href={mapsLink} target="_blank" rel="noopener">Buka di Google Maps →</a>
+      <p style="margin-top:12px">Suara Konsumen · <a class="link" href={waSuara} target="_blank" rel="noopener">WA {site.suaraKonsumen}</a></p>
+    </div>
+  </div>
+  <div class="map-embed" data-reveal>
+    <iframe
+      src={embedSrc}
+      title="Peta lokasi CV Ayub Podo Rukun"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      allowfullscreen
+    ></iframe>
+  </div>
+</section>

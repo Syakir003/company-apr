@@ -1,0 +1,27 @@
+---
+import { certificates } from '../data/site.js';
+---
+<section id="sertifikat" class="wrap section" style="padding-top:24px">
+  <div class="sec-head" data-reveal>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Sertifikat &amp; Legalitas</span></div>
+      <h2>Legalitas dan kompetensi yang terverifikasi.</h2>
+    </div>
+    <div class="right">
+      <p>Kompetensi teknisi dan kemitraan resmi pabrikan yang mendukung setiap layanan kami. Klik untuk memperbesar.</p>
+    </div>
+  </div>
+  <div class="certs" data-reveal-group>
+    {certificates.map(c => (
+      <figure class="cert">
+        <div class="cert-ph"><img src={c.img} alt={`Sertifikat: ${c.title} — ${c.issuer}`} data-zoom loading="lazy" /></div>
+        <figcaption>
+          <span class="cert-cat mono">{c.cat}</span>
+          <b>{c.title}</b>
+          <span class="cert-iss">{c.issuer}</span>
+          <a class="cert-link" href={encodeURI(`/assets/certificates/${c.file}`)} target="_blank" rel="noopener">Buka PDF →</a>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</section>

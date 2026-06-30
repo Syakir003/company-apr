@@ -1,0 +1,43 @@
+---
+import { site } from '../data/site.js';
+const tel = `tel:${site.hp.replace(/\s/g, '')}`;
+const mail = `mailto:${site.email}`;
+const waSuara = `https://wa.me/${site.waSuaraKonsumen}?text=${encodeURIComponent('Halo CV Ayub Podo Rukun, saya ingin menyampaikan masukan/keluhan.')}`;
+---
+<footer id="kontak">
+  <div class="wrap">
+    <div class="fgrid" data-reveal-group>
+      <div class="fbrand">
+        <div class="logo">
+          <img class="brand-logo" src="/assets/logo-apr-trim.png" width="263" height="136" alt={`Logo ${site.brand}`} />
+          <div class="wm"><b style="font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.02em">{site.brand}</b><small>{site.tagline}</small></div>
+        </div>
+        <p>Penjualan, servis, dan perawatan AC untuk rumah tinggal, perkantoran, dan industri besar. Berdiri sejak {site.established} di Mojokerto, Jawa Timur.</p>
+        <div class="mono" style="font-size:10.5px">PROFESIONAL · TERPERCAYA · TEPAT WAKTU</div>
+      </div>
+      <div class="fcol">
+        <h5>Layanan</h5>
+        <ul><li><a href="#layanan">Penjualan Unit AC</a></li><li><a href="#layanan">Servis &amp; Perbaikan</a></li><li><a href="#layanan">Perawatan Berkala</a></li><li><a href="#layanan">Cleaning &amp; Rental AC</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h5>Perusahaan</h5>
+        <ul><li><a href="#tentang">Tentang Kami</a></li><li><a href="#rekanan">Rekanan</a></li><li><a href="#tentang">Visi &amp; Misi</a></li><li><a href="#kontak">Kontak</a></li></ul>
+      </div>
+      <div class="fcol">
+        <h5>Kontak</h5>
+        <ul>
+          <li>Telp {site.phone}</li>
+          <li><a href={tel}>HP {site.hp}</a></li>
+          <li><a href={waSuara} target="_blank" rel="noopener">Suara Konsumen (WA) {site.suaraKonsumen}</a></li>
+          <li><a href={mail}>{site.email}</a></li>
+          <li>{site.addressShort}</li>
+          <li>Buka {site.hours} — {site.hoursNote}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="fbar">
+      <span>© 2026 {site.name}. Hak cipta dilindungi.</span>
+      <span class="lk"><a href="#">Kebijakan Privasi</a><a href="#">Syarat &amp; Ketentuan</a></span>
+    </div>
+  </div>
+</footer>

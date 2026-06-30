@@ -1,0 +1,20 @@
+---
+import { nav, site } from '../data/site.js';
+---
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a class="brand" href="#beranda" aria-label={`${site.brand} — beranda`}>
+        <img class="brand-logo" src="/assets/logo-apr-trim.png" width="263" height="136" alt={`Logo ${site.brand}`} />
+        <div class="wm"><b>{site.brand}</b><small>{site.tagline}</small></div>
+      </a>
+      <nav class="menu" id="primary-menu" aria-label="Navigasi utama">
+        {nav.map((item, i) => <a href={item.href} class={i === 0 ? 'active' : ''}>{item.label}</a>)}
+        <a class="m-cta" href="#kontak">Konsultasi</a>
+      </nav>
+      <button class="burger" aria-label="Buka menu" aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a class="cta" href="#kontak">Konsultasi</a>
+    </div>
+  </div>
+</header>
+<div class="nav-scrim" aria-hidden="true"></div>

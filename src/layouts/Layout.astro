@@ -1,0 +1,133 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site.js';
+const {
+  title = `${site.name} Sales · Service · Sparepart · Rental AC`,
+  description = 'CV Ayub Podo Rukun — penjualan, servis, dan perawatan AC untuk industri dan hunian di Mojokerto, Jawa Timur. Berdiri sejak 2010.'
+} = Astro.props;
+const waLink = `https://wa.me/${site.waNumber}?text=${encodeURIComponent('Halo CV Ayub Podo Rukun, saya ingin bertanya tentang layanan AC.')}`;
+---
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script is:inline>document.documentElement.classList.add('js');</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+
+  <a class="wa" href={waLink} target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.6 5.6.6 11.9c0 2.1.6 4.1 1.6 5.9L.5 23.5l5.8-1.5c1.7 1 3.7 1.5 5.7 1.5 6.3 0 11.4-5.1 11.4-11.4S18.3.5 12 .5zm0 20.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.4.9.9-3.3-.2-.4c-1-1.6-1.5-3.4-1.5-5.3 0-5.2 4.3-9.5 9.6-9.5 5.2 0 9.5 4.3 9.5 9.5s-4.3 9.4-9.5 9.4zm5.5-7.1c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.2-.2.3-.7 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.2-.2.2-.3.3-.5.1-.2.1-.4 0-.5-.1-.2-.7-1.6-.9-2.2-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
+    WhatsApp
+  </a>
+
+  <div class="lb" id="lightbox"><button class="x" aria-label="Tutup">×</button><img src="" alt="" /></div>
+
+  <script>
+    const burger = document.querySelector('.burger');
+    const menu = document.querySelector('.menu');
+    const scrim = document.querySelector('.nav-scrim');
+    const setMenu = (open) => {
+      if (!menu || !burger) return;
+      menu.classList.toggle('open', open);
+      burger.classList.toggle('is-open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      burger.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+      document.body.classList.toggle('menu-open', open);
+    };
+    burger && burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+    menu && menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    scrim && scrim.addEventListener('click', () => setMenu(false));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+    // Release the mobile menu (and its scroll lock) when the viewport grows to desktop width
+    const desktopMq = window.matchMedia('(min-width: 981px)');
+    const onDesktop = e => { if (e.matches) setMenu(false); };
+    desktopMq.addEventListener ? desktopMq.addEventListener('change', onDesktop) : desktopMq.addListener(onDesktop);
+
+    const hdr = document.querySelector('header');
+
+    // Scroll-spy: highlight the nav link for the section currently in view.
+    const navLinks = menu ? [...menu.querySelectorAll('a[href^="#"]')] : [];
+    const linkById = new Map();
+    navLinks.forEach(l => {
+      const id = l.getAttribute('href').slice(1);
+      if (id && !linkById.has(id)) linkById.set(id, l);
+    });
+    const docTop = el => el.getBoundingClientRect().top + window.scrollY;
+    // Sort by document position — nav order differs from DOM order (rekanan vs tentang)
+    const spyTargets = [...linkById.keys()]
+      .map(id => document.getElementById(id))
+      .filter(Boolean)
+      .sort((a, b) => docTop(a) - docTop(b));
+    const setActive = (id) => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const l = linkById.get(id);
+      l && l.classList.add('active');
+    };
+    const updateSpy = () => {
+      if (!spyTargets.length) return;
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      let current = spyTargets[0];
+      if (atBottom) {
+        current = spyTargets[spyTargets.length - 1];
+      } else {
+        const line = window.scrollY + window.innerHeight * 0.45;
+        for (const t of spyTargets) { if (docTop(t) <= line) current = t; }
+      }
+      setActive(current.id);
+    };
+
+    const onScroll = () => {
+      hdr && hdr.classList.toggle('scrolled', window.scrollY > 10);
+      updateSpy();
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateSpy, { passive: true });
+
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb && lb.querySelector('img');
+    document.querySelectorAll('[data-zoom]').forEach(img => {
+      img.addEventListener('click', () => { lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open'); });
+    });
+    lb && lb.addEventListener('click', () => lb.classList.remove('open'));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb) lb.classList.remove('open'); });
+
+    // Dokumentasi — expanding accordion. Tap/click widens the panel; hover (desktop) previews.
+    const docPanels = [...document.querySelectorAll('[data-doc]')];
+    if (docPanels.length) {
+      const activate = (panel) => {
+        docPanels.forEach(p => { p.classList.remove('active'); p.setAttribute('aria-pressed', 'false'); });
+        panel.classList.add('active');
+        panel.setAttribute('aria-pressed', 'true');
+      };
+      docPanels.forEach(panel => {
+        panel.addEventListener('click', () => activate(panel));
+        panel.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(panel); }
+        });
+      });
+    }
+  </script>
+
+  <script>
+    import { initReveal } from '../scripts/reveal.js';
+    import { initHeroTilt } from '../scripts/hero-tilt.js';
+    import { initBrandWall } from '../scripts/brand-wall.js';
+    import { initHeroSlideshow } from '../scripts/hero-slideshow.js';
+    const start = () => { initReveal(); initHeroTilt(); initBrandWall(); initHeroSlideshow(); };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+  </script>
+</body>
+</html>

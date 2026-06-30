@@ -1,0 +1,22 @@
+---
+import { steps } from '../data/site.js';
+---
+<section class="wrap section" style="padding-top:24px">
+  <div class="sec-head" style="margin-bottom:50px" data-reveal>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Proses Kerja</span></div>
+      <h2>Empat langkah menuju AC yang andal.</h2>
+    </div>
+    <div class="right"><p>Alur kerja terstruktur memastikan layanan berjalan cepat, tepat waktu, dan transparan.</p></div>
+  </div>
+  <div class="steps" data-reveal-group>
+    {steps.map(s => (
+      <div class="step">
+        <div class="bar"><span class="d"></span><span class="l"></span></div>
+        <div class="n">{s.n}</div>
+        <h3>{s.title}</h3>
+        <p>{s.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>

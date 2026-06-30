@@ -1,0 +1,27 @@
+---
+import { gallery } from '../data/site.js';
+---
+<section class="wrap section" style="padding-top:24px">
+  <div class="sec-head" style="margin-bottom:44px" data-reveal>
+    <div>
+      <div class="eyebrow"><span class="tick"></span><span class="mono">Dokumentasi</span></div>
+      <h2>Pekerjaan kami di lapangan.</h2>
+    </div>
+    <div class="right"><p>Sebagian dokumentasi penjualan, instalasi, dan perawatan AC oleh tim kami. Arahkan kursor atau ketuk foto untuk melihatnya lebih lebar.</p></div>
+  </div>
+  <div class="docs-accordion" role="group" aria-label="Galeri dokumentasi pekerjaan" data-reveal>
+    {gallery.map((g, i) => (
+      <div
+        class={`doc-panel${i === 0 ? ' active' : ''}`}
+        role="button"
+        tabindex="0"
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        aria-label={`${g.alt} — ketuk untuk melebarkan`}
+        data-doc
+      >
+        <img src={g.src} alt={g.alt} loading="lazy" />
+        <span class="doc-cap"><span class="doc-cap-t">{g.alt}</span></span>
+      </div>
+    ))}
+  </div>
+</section>
