@@ -1,11 +1,54 @@
 ---
 import '../styles/global.css';
-import { site } from '../data/site.js';
+import { site, services } from '../data/site.js';
 const {
-  title = `${site.name} Sales · Service · Sparepart · Rental AC`,
-  description = 'CV Ayub Podo Rukun — penjualan, servis, dan perawatan AC untuk industri dan hunian di Mojokerto, Jawa Timur. Berdiri sejak 2010.'
+  title = 'Service & Jual AC Mojokerto | CV Ayub Podo Rukun',
+  description = 'Service, jual, sewa & perawatan AC untuk hunian & industri di Mojokerto, Sidoarjo, Jombang & sekitarnya. CV Ayub Podo Rukun sejak 2007. Telp 0822 3388 9990.'
 } = Astro.props;
 const waLink = `https://wa.me/${site.waNumber}?text=${encodeURIComponent('Halo CV Ayub Podo Rukun, saya ingin bertanya tentang layanan AC.')}`;
+
+// --- SEO: URL absolut (ganti domain di astro.config.mjs -> `site`) ---
+const SITE_URL = Astro.site ?? new URL('https://example.com');
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImage = new URL('/assets/teknisi1.jpeg', SITE_URL).href;
+const logoUrl = new URL('/assets/logo-apr-trim.png', SITE_URL).href;
+const telIntl = '+62' + site.hp.replace(/\D/g, '').replace(/^0/, '');
+
+// --- Structured data Local Business (Mojokerto) ---
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HVACBusiness',
+  '@id': SITE_URL.href + '#business',
+  name: site.name,
+  image: ogImage,
+  logo: logoUrl,
+  url: SITE_URL.href,
+  telephone: telIntl,
+  email: site.email,
+  priceRange: '$$',
+  foundingDate: String(site.established),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Jl. Gunung Anyar RT.01/06, Gunung Gedangan',
+    addressLocality: 'Mojokerto',
+    addressRegion: 'Jawa Timur',
+    addressCountry: 'ID'
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
+  hasMap: site.mapsUrl,
+  areaServed: site.areaServed.map((a) => ({ '@type': 'City', name: a })),
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '08:00',
+    closes: '17:00'
+  }],
+  sameAs: [site.mapsUrl],
+  makesOffer: services.map((s) => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: s.title, description: s.desc }
+  }))
+};
 ---
 <!doctype html>
 <html lang="id">
@@ -18,6 +61,24 @@ const waLink = `https://wa.me/${site.waNumber}?text=${encodeURIComponent('Halo C
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="geo.region" content="ID-JI" />
+  <meta name="geo.placename" content="Mojokerto, Jawa Timur" />
+  <meta name="geo.position" content="-7.4739045;112.4555979" />
+  <meta name="ICBM" content="-7.4739045, 112.4555979" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="id_ID" />
+  <meta property="og:site_name" content={site.name} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />

@@ -15,6 +15,10 @@ export const site = {
   addressShort: "Jl. Gunung Anyar RT.01/06, Gunung Gedangan, Mojokerto",
   hours: "08.00 WIB – 17.00 WIB",
   hoursNote: "setiap hari (kecuali tanggal merah)",
+  // Lokasi & jangkauan layanan (dipakai untuk SEO / structured data)
+  geo: { lat: -7.4739045, lng: 112.4555979 },
+  mapsUrl: "https://maps.app.goo.gl/TS2aUt49Pyw1bcJ97",
+  areaServed: ["Kota Mojokerto", "Kabupaten Mojokerto", "Sidoarjo", "Jombang", "Gresik", "Lamongan", "Surabaya"],
 };
 
 export const nav = [
