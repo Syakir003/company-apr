@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Ganti domain di bawah dengan domain final, lalu jalankan: npx astro add sitemap
-Sitemap: https://example.com/sitemap-index.xml
+Sitemap: https://ayubpodorukun.com/sitemap.xml

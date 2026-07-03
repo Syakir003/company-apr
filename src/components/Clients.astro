@@ -11,7 +11,13 @@ import { clients } from '../data/site.js';
       <div class="right"><p>Sebagian rekanan CV Ayub Podo Rukun untuk layanan penjualan, servis, dan maintenance AC di Jawa Timur.</p></div>
     </div>
     <div class="cgrid" data-reveal-group>
-      {clients.map(c => <div class="c"><b>{c.name}</b><span>{c.loc}</span></div>)}
+      {clients.map(c => (
+        <div class="c" title={c.name}>
+          {c.logo && <img class="c-logo" src={c.logo} alt={`Logo ${c.name}`} loading="lazy" decoding="async" />}
+          <b>{c.name}</b>
+          <span>{c.loc}</span>
+        </div>
+      ))}
     </div>
   </div>
 </section>

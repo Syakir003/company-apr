@@ -18,7 +18,15 @@ export const site = {
   // Lokasi & jangkauan layanan (dipakai untuk SEO / structured data)
   geo: { lat: -7.4739045, lng: 112.4555979 },
   mapsUrl: "https://maps.app.goo.gl/TS2aUt49Pyw1bcJ97",
-  areaServed: ["Kota Mojokerto", "Kabupaten Mojokerto", "Sidoarjo", "Jombang", "Gresik", "Lamongan", "Surabaya"],
+  areaServed: [
+    "Kota Mojokerto",
+    "Kabupaten Mojokerto",
+    "Sidoarjo",
+    "Jombang",
+    "Gresik",
+    "Lamongan",
+    "Surabaya",
+  ],
 };
 
 export const nav = [
@@ -103,32 +111,82 @@ export const misi = [
   "Berkontribusi pada efisiensi energi dengan memastikan AC bekerja optimal.",
 ];
 
+// Rekanan industri. `logo` = path logo asli di public/assets/ (nama file apa
+// adanya, tidak di-rename). Bila `logo` dikosongkan, sel fallback ke teks nama.
 export const clients = [
-  { name: "PT Daesang Ingredient Indonesia", loc: "Gresik" },
-  { name: "PT Tjiwi Kimia", loc: "Sidoarjo" },
-  { name: "PT Albea", loc: "Ngoro Industri Persada" },
-  { name: "PT Rucika", loc: "Ngoro" },
-  { name: "PT Rucika", loc: "Gresik" },
-  { name: "PT Rolent", loc: "Gresik" },
-  { name: "PT Hansa Pratama", loc: "Sidoarjo" },
-  { name: "PT Abadi Agrosindo", loc: "Sidoarjo" },
-  { name: "PT Corin Bata Ringan", loc: "Sidoarjo" },
-  { name: "PT Corin Maxxi", loc: "Sidoarjo" },
-  { name: "RS Citra Medika", loc: "Sidoarjo" },
-  { name: "PT Kebun Tebu Mas", loc: "Lamongan" },
-  { name: "PT Pei Hai Internasional", loc: "Jombang" },
-  { name: "PT Djabes Tunas Utama", loc: "Ngoro" },
+  {
+    name: "PT Daesang Ingredient Indonesia",
+    loc: "Gresik",
+    logo: "/assets/logo-daesang1-03.png",
+  },
+  {
+    name: "PT Tjiwi Kimia",
+    loc: "Sidoarjo",
+    logo: "/assets/tjiwi-kimia-logo.png",
+  },
+  {
+    name: "PT Albea",
+    loc: "Ngoro Industri Persada",
+    logo: "/assets/albea-logo-removebg-preview.png",
+  },
+  { name: "PT Rucika", loc: "Ngoro", logo: "/assets/rucika-logo.png" },
+  { name: "PT Rucika", loc: "Gresik", logo: "/assets/rucika-logo.png" },
+  { name: "PT Rolent", loc: "Gresik", logo: "/assets/rolent-logo.png" },
+  { name: "PT Hansa Pratama", loc: "Sidoarjo", logo: "/assets/hansa-logo.png" },
+  {
+    name: "PT Abadi Agrosindo",
+    loc: "Sidoarjo",
+    logo: "/assets/PT-Abadi-Agrosindo-Persada-logo.webp",
+  },
+  {
+    name: "PT Corin Bata Ringan",
+    loc: "Sidoarjo",
+    logo: "/assets/corin-logo.webp",
+  },
+  { name: "PT Corin Maxxi", loc: "Sidoarjo", logo: "/assets/corin-logo.webp" },
+  {
+    name: "RS Citra Medika",
+    loc: "Sidoarjo",
+    logo: "/assets/rs-citra-medika-logo.jpg",
+  },
+  {
+    name: "PT Kebun Tebu Mas",
+    loc: "Lamongan",
+    logo: "/assets/kebun-tebu-mas-logo.jpg",
+  },
+  {
+    name: "PT Pei Hai Internasional",
+    loc: "Jombang",
+    logo: "/assets/Logo-PT-Pei-Hai-International-Wiratama-Indonesia.webp",
+  },
+  {
+    name: "PT Djabes Tunas Utama",
+    loc: "Ngoro",
+    logo: "/assets/djabes-tunas-utama-logo.webp",
+  },
 ];
 
 export const gallery = [
-  { src: "/assets/service1.jpeg", alt: "Armada pengiriman unit AC Ayub AC pada malam hari" },
-  { src: "/assets/teknisi6.jpeg", alt: "Tim teknisi menguji komponen AC di workshop" },
-  { src: "/assets/unit5.jpeg", alt: "Stok unit AC Gree dan material pipa tembaga" },
+  {
+    src: "/assets/service1.jpeg",
+    alt: "Armada pengiriman unit AC Ayub AC pada malam hari",
+  },
+  {
+    src: "/assets/teknisi6.jpeg",
+    alt: "Tim teknisi menguji komponen AC di workshop",
+  },
+  {
+    src: "/assets/unit5.jpeg",
+    alt: "Stok unit AC Gree dan material pipa tembaga",
+  },
   { src: "/assets/teknisi4.jpeg", alt: "Pekerjaan instalasi AC industri" },
   { src: "/assets/unit3.jpeg", alt: "Armada dan workshop CV Ayub Podo Rukun" },
   { src: "/assets/teknisi5.jpeg", alt: "Teknisi merawat unit kondensor" },
   { src: "/assets/unit4.jpeg", alt: "Gudang penyimpanan unit AC Gree" },
-  { src: "/assets/teknisi8.jpeg", alt: "Tim teknisi menyiapkan peralatan dan refrigeran" },
+  {
+    src: "/assets/teknisi8.jpeg",
+    alt: "Tim teknisi menyiapkan peralatan dan refrigeran",
+  },
 ];
 
 // Sertifikat & legalitas. `img` = thumbnail (render halaman-1 PDF), `file` = PDF asli.
