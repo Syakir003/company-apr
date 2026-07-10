@@ -324,7 +324,7 @@ export const gallery = [
   },
   {
     src: "/assets/unit6.jpeg",
-    alt: "Unit AC Daikin siap dipasang di lokasi proyek",
+    alt: "Unit AC Gree siap dipasang di lokasi proyek",
   },
   {
     src: "/assets/teknisi1.jpeg",
