@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site.js';
+import { site, services } from '../data/site.js';
 const tel = `tel:${site.hp.replace(/\s/g, '')}`;
 const mail = `mailto:${site.email}`;
 const waSuara = `https://wa.me/${site.waSuaraKonsumen}?text=${encodeURIComponent('Halo CV Ayub Podo Rukun, saya ingin menyampaikan masukan/keluhan.')}`;
@@ -17,7 +17,7 @@ const waSuara = `https://wa.me/${site.waSuaraKonsumen}?text=${encodeURIComponent
       </div>
       <div class="fcol">
         <h5>Layanan</h5>
-        <ul><li><a href="#layanan">Penjualan Unit AC</a></li><li><a href="#layanan">Servis &amp; Perbaikan</a></li><li><a href="#layanan">Perawatan Berkala</a></li><li><a href="#layanan">Cleaning &amp; Rental AC</a></li></ul>
+        <ul><li><a href="/layanan/penjualan-ac">Penjualan Unit AC</a></li><li><a href="/layanan/servis-ac">Servis &amp; Perbaikan</a></li><li><a href="/layanan/perawatan-ac">Perawatan Berkala</a></li><li><a href="/layanan/sewa-ac">Rental AC</a></li></ul>
       </div>
       <div class="fcol">
         <h5>Perusahaan</h5>

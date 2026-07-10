@@ -107,6 +107,22 @@ const schema = {
     };
     burger && burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
     menu && menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    // Dropdown toggle: klik tombol Layanan buka/tutup sub-menu
+    document.querySelectorAll('.dd-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dd = btn.closest('.dd');
+        if (!dd) return;
+        const isOpen = dd.classList.contains('open');
+        document.querySelectorAll('.dd.open').forEach(d => d.classList.remove('open'));
+        if (!isOpen) dd.classList.add('open');
+      });
+      // Tutup dropdown saat klik di luar
+      btn.addEventListener('keydown', (e) => { if (e.key === 'Escape') btn.closest('.dd')?.classList.remove('open'); });
+    });
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.dd')) document.querySelectorAll('.dd.open').forEach(d => d.classList.remove('open'));
+    });
     scrim && scrim.addEventListener('click', () => setMenu(false));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
@@ -117,44 +133,49 @@ const schema = {
 
     const hdr = document.querySelector('header');
 
-    // Scroll-spy: highlight the nav link for the section currently in view.
-    const navLinks = menu ? [...menu.querySelectorAll('a[href^="#"]')] : [];
-    const linkById = new Map();
-    navLinks.forEach(l => {
-      const id = l.getAttribute('href').slice(1);
-      if (id && !linkById.has(id)) linkById.set(id, l);
-    });
-    const docTop = el => el.getBoundingClientRect().top + window.scrollY;
-    // Sort by document position — nav order differs from DOM order (rekanan vs tentang)
-    const spyTargets = [...linkById.keys()]
-      .map(id => document.getElementById(id))
-      .filter(Boolean)
-      .sort((a, b) => docTop(a) - docTop(b));
-    const setActive = (id) => {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const l = linkById.get(id);
-      l && l.classList.add('active');
-    };
-    const updateSpy = () => {
-      if (!spyTargets.length) return;
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      let current = spyTargets[0];
-      if (atBottom) {
-        current = spyTargets[spyTargets.length - 1];
-      } else {
-        const line = window.scrollY + window.innerHeight * 0.45;
-        for (const t of spyTargets) { if (docTop(t) <= line) current = t; }
-      }
-      setActive(current.id);
-    };
+    // Scroll-spy: hanya jalan di halaman utama (#beranda dll hanya ada di homepage)
+    const isHome = document.getElementById('beranda') !== null;
+    if (isHome) {
+      const navLinks = menu ? [...menu.querySelectorAll('a[href^="#"], a[href^="/#"]')] : [];
+      const linkById = new Map();
+      navLinks.forEach(l => {
+        const href = l.getAttribute('href');
+        const id = href.startsWith('/#') ? href.slice(2) : href.slice(1);
+        if (id && !linkById.has(id)) linkById.set(id, l);
+      });
+      const docTop = el => el.getBoundingClientRect().top + window.scrollY;
+      const spyTargets = [...linkById.keys()]
+        .map(id => document.getElementById(id))
+        .filter(Boolean)
+        .sort((a, b) => docTop(a) - docTop(b));
+      const setActive = (id) => {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const l = linkById.get(id);
+        l && l.classList.add('active');
+      };
+      const updateSpy = () => {
+        if (!spyTargets.length) return;
+        const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+        let current = spyTargets[0];
+        if (atBottom) {
+          current = spyTargets[spyTargets.length - 1];
+        } else {
+          const line = window.scrollY + window.innerHeight * 0.45;
+          for (const t of spyTargets) { if (docTop(t) <= line) current = t; }
+        }
+        setActive(current.id);
+      };
+      const onScrollSpy = () => updateSpy();
+      updateSpy();
+      window.addEventListener('scroll', onScrollSpy, { passive: true });
+      window.addEventListener('resize', updateSpy, { passive: true });
+    }
 
     const onScroll = () => {
       hdr && hdr.classList.toggle('scrolled', window.scrollY > 10);
-      updateSpy();
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', updateSpy, { passive: true });
 
     const lb = document.getElementById('lightbox');
     const lbImg = lb && lb.querySelector('img');

@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ServiceDetail from '../../components/ServiceDetail.astro';
+import { services } from '../../data/site.js';
+const s = services.find((x) => x.slug === 'penjualan-ac');
+---
+<Layout title="Jual AC Baru & Sparepart Orisinal Mojokerto | CV Ayub Podo Rukun" description={s.tagline}>
+  <Header />
+  <main>
+    <ServiceDetail service={s} />
+  </main>
+  <Footer />
+</Layout>

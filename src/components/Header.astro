@@ -1,19 +1,40 @@
 ---
-import { nav, site } from '../data/site.js';
+import { nav, site, services } from '../data/site.js';
+const currentPath = Astro.url.pathname;
+const normPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
+const isHome = normPath === '/';
+const isActive = (href) => {
+  if (href === '/#beranda') return isHome;
+  if (href.startsWith('/#')) return false;
+  if (href.startsWith('/layanan/')) return normPath.startsWith('/layanan/');
+  return normPath.startsWith(href);
+};
+const isLayananActive = normPath.startsWith('/layanan/');
+const chevron = `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
 ---
 <header>
   <div class="wrap">
     <div class="nav">
-      <a class="brand" href="#beranda" aria-label={`${site.brand} — beranda`}>
+      <a class="brand" href="/" aria-label={`${site.brand} — beranda`}>
         <img class="brand-logo" src="/assets/logo-apr-trim.png" width="263" height="136" alt={`Logo ${site.brand}`} />
         <div class="wm"><b>{site.brand}</b><small>{site.tagline}</small></div>
       </a>
       <nav class="menu" id="primary-menu" aria-label="Navigasi utama">
-        {nav.map((item, i) => <a href={item.href} class={i === 0 ? 'active' : ''}>{item.label}</a>)}
-        <a class="m-cta" href="#kontak">Konsultasi</a>
+        {nav.map((item) => {
+          if (item.label === 'Layanan') {
+            return <div class="dd">
+              <a role="button" tabindex="0" class={`dd-btn${isLayananActive ? ' active' : ''}`}>{item.label}<span class="dd-chev" set:html={chevron} /></a>
+              <div class="dd-m">
+                {services.map((s) => <a href={`/layanan/${s.slug}`} class={normPath === `/layanan/${s.slug}/` ? 'active' : ''}>{s.title}</a>)}
+              </div>
+            </div>;
+          }
+          return <a href={item.href} class={isActive(item.href) ? 'active' : ''}>{item.label}</a>;
+        })}
+        <a class="m-cta" href={isHome ? '#kontak' : '/#kontak'}>Konsultasi</a>
       </nav>
       <button class="burger" aria-label="Buka menu" aria-controls="primary-menu" aria-expanded="false"><span></span><span></span><span></span></button>
-      <a class="cta" href="#kontak">Konsultasi</a>
+      <a class="cta" href={isHome ? '#kontak' : '/#kontak'}>Konsultasi</a>
     </div>
   </div>
 </header>

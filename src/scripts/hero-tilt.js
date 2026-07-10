@@ -45,22 +45,28 @@ export function initHeroTilt() {
     });
   }
 
-  // --- Subtle scroll parallax on the hero photo ---
-  const photo = document.querySelector('[data-parallax]');
-  if (photo && !reduce && PARALLAX > 0) {
-    let ticking = false;
-    const update = () => {
-      ticking = false;
-      const r = photo.getBoundingClientRect();
-      const fromCenter = r.top + r.height / 2 - window.innerHeight / 2;
-      const shift = Math.max(-12, Math.min(12, -fromCenter * PARALLAX));
-      photo.style.transform = `translateY(${shift.toFixed(1)}px) scale(1.06)`;
+  // --- 3D scroll parallax on hero/service photos ---
+  const parallaxEls = [...document.querySelectorAll('[data-parallax]')];
+  if (parallaxEls.length && !reduce) {
+    const updateAll = () => {
+      parallaxEls.forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // Only apply when element is in or near viewport
+        if (r.bottom < -200 || r.top > vh + 200) {
+          el.style.transform = '';
+          return;
+        }
+        const fromCenter = r.top + r.height / 2 - vh / 2;
+        const shift = Math.max(-18, Math.min(18, -fromCenter * 0.05));
+        const rot = Math.max(-4, Math.min(4, -fromCenter * 0.012));
+        el.style.transform = `perspective(800px) translateY(${shift.toFixed(1)}px) rotateX(${rot.toFixed(2)}deg) scale(1.04)`;
+        el.style.transition = 'transform 0.15s ease-out';
+      });
     };
-    const onScroll = () => {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    };
+    const onScroll = () => { requestAnimationFrame(updateAll); };
     window.addEventListener('scroll', onScroll, { passive: true });
-    update();
+    updateAll();
   }
 
   // --- Faint magnetic CTA (desktop pointer only) ---

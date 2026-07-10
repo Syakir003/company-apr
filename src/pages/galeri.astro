@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, gallery } from '../data/site.js';
+const title = `Galeri Foto — ${site.brand}`;
+const description = `Dokumentasi pekerjaan penjualan, instalasi, servis, dan perawatan AC oleh ${site.name} di Mojokerto dan sekitarnya.`;
+---
+<Layout {title} {description}>
+  <Header />
+  <main>
+    <section class="galeri-hero">
+      <div class="wrap">
+        <div data-reveal>
+          <div class="eyebrow"><span class="tick"></span><span class="mono">Dokumentasi</span></div>
+          <h1>Galeri pekerjaan kami.</h1>
+          <p class="galeri-sub">Dokumentasi penjualan, instalasi, servis, perawatan, dan rental AC oleh tim CV Ayub Podo Rukun di Mojokerto, Sidoarjo, Jombang, dan sekitarnya.</p>
+        </div>
+      </div>
+    </section>
+    <section class="galeri-grid wrap section">
+      <div class="galeri-grid-inner">
+        {gallery.map((g) => (
+          <div class="galeri-item" data-reveal>
+            <img src={g.src} alt={g.alt} loading="lazy" data-zoom />
+            <span class="galeri-cap">{g.alt}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
