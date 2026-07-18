@@ -4,12 +4,15 @@ import { site } from '../data/site.js';
 <section id="beranda" class="hero">
   <!-- Full-bleed background: crossfade slideshow over the field photos -->
   <div class="hero-bg" data-parallax data-hero-slides>
-    <img class="is-active" src="/assets/teknisi1.jpeg" alt="Teknisi service AC industri CV Ayub Podo Rukun di Mojokerto" fetchpriority="high" decoding="async" />
-    <img src="/assets/unit1.jpeg" alt="Armada Ayub AC mengirim unit AC ke lokasi" loading="lazy" decoding="async" />
-    <img src="/assets/teknisi2.jpeg" alt="Tim teknisi memasang unit AC di dinding gedung industri" loading="lazy" decoding="async" />
-    <img src="/assets/unit2.jpeg" alt="Pengiriman unit AC Gree dengan armada Ayub AC" loading="lazy" decoding="async" />
-    <img src="/assets/teknisi3.jpeg" alt="Teknisi mengelas pipa tembaga pada kompresor" loading="lazy" decoding="async" />
-    <img src="/assets/teknisi7.jpeg" alt="Teknisi mengisi refrigeran dengan manifold gauge" loading="lazy" decoding="async" />
+    <img class="is-active" src="/assets/teknisi1.webp" onerror="this.onerror=null;this.src='/assets/teknisi1.jpeg'" alt="Teknisi service AC industri CV Ayub Podo Rukun di Mojokerto" fetchpriority="high" decoding="async" width="1280" height="960" />
+    <!-- Remaining slides carry no src/data URL that the browser can fetch
+         until hero-slideshow.js hydrates them after the page has loaded, so
+         they don't compete with the LCP image for bandwidth on first load. -->
+    <img data-lazy-slide data-src="/assets/unit1.webp" data-fallback="/assets/unit1.jpeg" alt="Armada Ayub AC mengirim unit AC ke lokasi" decoding="async" width="1280" height="960" />
+    <img data-lazy-slide data-src="/assets/teknisi2.webp" data-fallback="/assets/teknisi2.jpeg" alt="Tim teknisi memasang unit AC di dinding gedung industri" decoding="async" width="715" height="960" />
+    <img data-lazy-slide data-src="/assets/unit2.webp" data-fallback="/assets/unit2.jpeg" alt="Pengiriman unit AC Gree dengan armada Ayub AC" decoding="async" width="960" height="1280" />
+    <img data-lazy-slide data-src="/assets/teknisi3.webp" data-fallback="/assets/teknisi3.jpeg" alt="Teknisi mengelas pipa tembaga pada kompresor" decoding="async" width="589" height="1280" />
+    <img data-lazy-slide data-src="/assets/teknisi7.webp" data-fallback="/assets/teknisi7.jpeg" alt="Teknisi mengisi refrigeran dengan manifold gauge" decoding="async" width="1920" height="1739" />
   </div>
   <div class="hero-scrim"></div>
 

@@ -3,6 +3,14 @@ import { site } from '../data/site.js';
 
 const { service } = Astro.props;
 const waLink = `https://wa.me/${site.waNumber}?text=${encodeURIComponent(`Halo CV Ayub Podo Rukun, saya ingin bertanya tentang ${service.title}.`)}`;
+const webpPhoto = service.photo.replace(/\.jpe?g$/i, '.webp');
+const PHOTO_DIMS = {
+  '/assets/unit5.jpeg': [1920, 1440],
+  '/assets/teknisi5.jpeg': [960, 1280],
+  '/assets/teknisi7.jpeg': [1920, 1739],
+  '/assets/unit7.jpeg': [1920, 1440],
+};
+const [photoW, photoH] = PHOTO_DIMS[service.photo] ?? [];
 const checkIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 const arrowIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>`;
 const chevronIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>`;
@@ -10,7 +18,7 @@ const chevronIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
 
 <section class="svc-hero">
   <div class="svc-hero-bg" data-parallax>
-    <img src={service.photo} alt={service.title} />
+    <img src={webpPhoto} onerror={`this.onerror=null;this.src='${service.photo}'`} alt={service.title} fetchpriority="high" decoding="async" width={photoW} height={photoH} />
   </div>
   <div class="svc-hero-scrim"></div>
   <div class="wrap svc-hero-inner">
